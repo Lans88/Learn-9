@@ -1,0 +1,64 @@
+
+//Оператор continue в цикле while
+var x = 0
+var sum = 0
+while x < 10 {
+x += 1
+if x % 2 == 1 {
+continue
+}
+sum += x
+}
+print (sum)
+
+//оператор break  в цикле while
+var lastNum = 54
+var currentNum = 1
+var sumOfInts = 0
+while currentNum <= lastNum {
+    sumOfInts += currentNum
+    if sumOfInts > 450 {
+        print ("Хранилище заполнено, последнее обработанное число \(currentNum)")
+        break
+    }
+    currentNum += 1
+}
+ print (sumOfInts)
+
+//Функции
+//простая ф-ия вывода сообщения на экран
+//объявление Функции
+func printMessage() {
+    print ("Сообщение принято")
+    
+}
+//вызов Функции
+printMessage()
+// Функция с входными параметрами, но ничего не возвращает
+func sumTwoInt (a: Int, b: Int) {
+    print ("Результат операции - \(a + b)")
+
+}
+sumTwoInt(a:10, b:12)
+
+//Более осмысленные параметры для функции(внешние имена)
+func sumTwoInt (num1 a: Int, num2 b: Int) {
+    print ("Результат операции - \(a + b)")
+
+}
+sumTwoInt(num1:10, num2:12)
+//Замена внешнего имени параметров
+func sumTwoInt (_ a: Int, _ b: Int) {
+    print ("Результат операции - \(a + b)")
+
+}
+sumTwoInt(10, 12)
+
+//Возвращаемое значение(return)
+func sumTwoInt (_ a: Int, _ b: Int) -> Int {
+    let result = a + b
+    print ("Результат операции - \(result)")
+    return result
+
+}
+var result = sumTwoInt(10, 12) //22
