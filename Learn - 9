@@ -1,0 +1,254 @@
+//Оператор ветвления Switch
+// проверка оценки через if
+let userMark = 4
+if userMark == 1 {
+    print ("Это фиаско, братан!")
+} else if userMark == 2 {
+    print ("Неудовлетворительно")
+} else if userMark == 3 {
+    print ("Удовлетворительно")
+} else if userMark == 4 {
+    print ("Экзамен сдан")
+} else if userMark == 5 {
+    print ("Экзамен сдан на отлично")
+} else {
+    print ("Выставлена некорректная оценка")
+}
+//Решение этой же задачи через switch/case
+switch userMark {
+case 1: print ("Это фиаско, братан!")
+case 2: print ("Неудовлетворительно")
+case 3: print ("Удовлетворительно")
+case 4: print ("Хорошо")
+case 5: print ("Отлично")
+default: print ("Некорректные сведения об оценке")
+}
+//перепишем задачу, вынесем распечатку результата за скобки.
+//Добавим новую переменную типа строка без присваивания значения
+let message: String
+switch userMark {
+case 1:
+    message = "Единица на экзамене! Это ужасно!"
+case 2:
+    message = "Ты точно останешься нв второй год!"
+case 3:
+    message = "Ты плохо учил материал в этом году"
+case 4:
+    message = "Неплохо, но могло бы быть и получше"
+case 5:
+    message = "Бесплатное место в универе тебе обеспечено"
+    default:
+    message = "Переданы некорректные данные об оценке"
+}
+print (message)
+    // Решение задачи с оценкой через диапазоны
+let userJohn = 3
+switch userJohn {
+case 1..<3:
+    print ("Экзамен не сдан")
+case 3:
+    print ("Требуется решение дополнительного задания")
+case 4...5: 
+    print ("Экзамен сдан")
+default:
+    assert(false, "Указана некорректная оценка")
+}
+
+//Оператор switch/case в работе с кортежами
+//Задача на определение вольера для вновь поступившего дракона
+let dragonCharacteristics: (color: String, weight: Float) = ("red", 1.4)
+switch dragonCharacteristics {
+case ("green", 0..<2):
+    print ("Cage #3")
+case ("red", 0..<2):
+    print ("Cage #2")
+case ("green", 2...), ("red", 2...):
+    print ("Cage #3")
+default:
+    print ("Дракон не может быть принят в стаю")
+}
+//Ключевое слово where в операторе switch
+var dragonCount = 3
+switch dragonCharacteristics {
+case ("Зеленный", 0..<2):
+    print ("Вольер №1")
+case ("красный", 0..<2):
+    print ("Вольер № 2")
+case ("Зеленный", 2...) where dragonCount < 5,
+         ("Красный", 2...) where dragonCount < 5:
+    print ("Вольер №3")
+default:
+    print ("Дракон не может быть принят в стаю")
+}
+//Связывание значений
+//Добавление еще одного условия
+switch dragonCharacteristics {
+case ("Зеленный", 0..<2):
+    print ("Вольер №1")
+case ("красный", 0..<2):
+    print ("Вольер № 2")
+    case ("Зеленный", 2...) where
+            dragonCharacteristics.weight.truncatingRemainder(dividingBy: 1) == 0 && dragonCount < 5,
+         ("Красный", 2...) where dragonCharacteristics.weight.truncatingRemainder(dividingBy: 1) == 0 && dragonCount <  5:
+        print ("Вольер №3")
+        default:
+            print ("Дракон не может быть принят в стаю")
+}
+
+//Оператор break в конструкции switch-case
+//Прекращает работу кода, если в дефолте нет кода
+let someInt = 12
+switch someInt {
+case 1...:
+    print ("Больше 0")
+case ..<0:
+    print ("Меньше 0")
+default:
+    break
+}
+//Ключевое слово fallthrough
+//Изменение логики функционирования оператора switch-case, выводит несколько значений из разных блоков кейс.
+let level: Character = "B"
+//Определение уровня готовности к ЧС
+switch level {
+case "A":
+    print ("Выключить все электрические приборы")
+    fallthrough
+case "B":
+    print ("Закрыть входные двери и окна")
+    fallthrough
+case "C":
+    print ("Соблюдать спокойствие")
+default: 
+    break
+}
+
+//Цикл for-in
+for i in 1...5 {
+    print (i)
+}
+let nameAndFingers = ["Ivan": 20, "Svetlana": 18, "Serg": 15]
+/*for (name, numbersOfFingers) in nameAndFingers {
+    print ("Pyro name is \(name) and numbers of fingers is \(numbersOfFingers)")
+}*/
+
+
+//Подсчет суммы элементов массива
+//Массив числел
+let numArray = Array (0...5)
+//Хранение результата вычислений
+var result: Int = 0
+//Цикл
+for number in numArray {
+    result += number
+}
+print (result)
+
+// внешняя переменная
+var myChar = "a"
+//внешняя константа
+let myString = "Swift"
+//цикл использует св-й параметр с имененем,
+//уже используемой глобальной переменной
+for myChar in myString {
+    //локальная константа
+    //вне цикла уже существует константа с таким именем
+    let myString = "Char is"
+    print ("\(myString) \(myChar)")
+}
+//Для экономии памяти связанный пар-тр можно заменить _
+for _ in 1...3 {
+    print ("Please, help me")
+}
+//Перебор по элементам словаря
+var countriesAndBlocks = ["Russia": "SNG", "England": "EURO"]
+for (countryName, orgName) in countriesAndBlocks {
+    print ("\(countryName) enter in \(orgName)")
+}
+for (countryName, _) in countriesAndBlocks {
+    print ("country - \(countryName)")
+}
+for (_, orgName) in countriesAndBlocks {
+    print ("organisation - \(orgName)")
+}
+//Получение и значения и индекса через метод enumerated()
+print("Несколько фактов обо мне:")
+let myMusikStyle = ["Rock", "Jazz", "Pop"]
+for (index, musikName) in myMusikStyle.enumerated() {
+    print ("\(index+1). Я люблю \(musikName)")
+}
+//Подсчет суммы всех нечетных/четных числе в диапазоне 1...1000
+var sumResult = 0
+for i in stride (from: 1, through: 1000, by:2) {
+    sumResult += i
+}
+print (sumResult)
+for i in stride (from:2, through: 1000, by: 2) {
+    sumResult += i
+}
+print (sumResult)
+
+//использование where в for in
+var result = 0
+for i in 1...10 where i % 2 == 0 {
+    result += i
+}
+print (result)
+
+//Многомерные коллекции в for in
+    // словарь с результатами игр
+let resultsOfGames = ["Red Wings": ["2:1", "2:3"], "Capitals": ["3:6", "4:8"], "Penguins": ["2:1", "2:4"]]
+// обработка словаря
+for (teamName, results) in resultsOfGames {
+    for oneResult in results {
+        print ("Игра с \(teamName) - \(oneResult)")
+    }
+}
+// применение continue в for in
+//ниже прога поочередно перебирает элементы в диапазоне, когда значение четное, оно выводится на экран. проверка происходит за счет деления числа на 2, если остаток отделения равен 1, то число нечетное и происходит переход к следующей итерации
+for i in 1...10 {
+    if i % 2 == 1 {
+        continue
+    } else {
+        print(i)
+    }
+}
+
+//использование break в for in
+//многократное вычисление рандомного числа в пределах 1-10б если занчение равно 5, выводится номер итерации
+import Foundation //подгрузка библиотеки для функции рандом
+for i in 1... {
+    let randNum = Int(arc4random_uniform(10))//объявили конст-ту с рандомным числом
+    if randNum == 5 {
+        print ("Итерация номер \(i)")
+        break
+    } 
+    
+}
+//цикл while
+var timer = 5
+print ("Counting down")
+while timer > 0 {
+    print (timer)
+    timer -= 1
+}
+print ("Start")
+
+//сложение всех чиcел в диапазоне 1...10
+var i = 1
+var sumResult = 0
+while i <= 10 {
+    sumResult += i
+    i += 1
+}
+print(sumResult)
+
+//сложение чисел через repeat-while
+
+var y = 1
+var sumResult2 = 0
+repeat {
+    sumResult2 += y
+    y +=  1
+} while y <= 10
+print (sumResult2)
